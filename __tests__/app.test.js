@@ -57,4 +57,15 @@ describe('check route responses', () => {
         expect(res.text).toEqual('<html><body><h1 style="color: blue">blue</h1></body></html>');
       });
   });
+
+  it('404s', () => {
+    return request(app)
+      .get('/badroute')
+      .send()
+      .expect('Content-Type', 'text/html')
+      .expect(404)
+      .then(res => {
+        expect(res.text).toEqual('<html><body><h1>Not Found</h1></body></html>');
+      });
+  });
 });
